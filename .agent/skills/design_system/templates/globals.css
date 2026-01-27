@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #8B5CF6;
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --bg-dark: #0F0F23;
+  --bg-card: #1A1A2E;
+}
+
+body {
+  font-family: 'Lato', 'Inter', system-ui, sans-serif;
+  background: linear-gradient(135deg, #0F0F23 0%, #1A1A2E 50%, #2D1B4E 100%);
+  min-height: 100vh;
+  color: #FFFFFF;
+}
+
+@layer components {
+  /* High-Fidelity Card */
+  .card {
+    @apply bg-dark-800/80 backdrop-blur-sm border border-dark-500 rounded-2xl shadow-xl;
+  }
+
+  /* Premium Buttons */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-xl transition-all shadow-lg shadow-primary-500/25;
+  }
+
+  /* Premium Inputs */
+  .input {
+    @apply w-full px-4 py-3 bg-dark-700 border border-dark-500 rounded-xl text-white placeholder-gray-500 transition-all focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
