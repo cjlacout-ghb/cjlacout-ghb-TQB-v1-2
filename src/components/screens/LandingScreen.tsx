@@ -15,16 +15,6 @@ const LandingScreen: React.FC<LandingScreenProps> = ({
     canContinue 
 }) => {
     const { t } = useLanguage();
-    const [showConfirm, setShowConfirm] = useState(false);
-
-    const handleNewClick = () => {
-        if (canContinue) {
-            setShowConfirm(true);
-        } else {
-            onNewTournament();
-        }
-    };
-
     return (
         <div className="max-w-4xl mx-auto px-4 py-12 flex flex-col items-center justify-center min-h-[70vh] animate-fade-in text-center">
             {/* Minimalist Logo/Brand Area */}
@@ -66,7 +56,7 @@ const LandingScreen: React.FC<LandingScreenProps> = ({
 
                 {/* New Tournament Card */}
                 <button
-                    onClick={handleNewClick}
+                    onClick={onNewTournament}
                     className={`group flex flex-col items-center p-10 bg-dark-800 border border-dark-600 rounded-2xl hover:border-primary-500/50 hover:bg-dark-700 transition-all duration-300 text-center ${!canContinue ? 'md:col-span-2 max-w-sm mx-auto' : ''}`}
                 >
                     <div className="w-16 h-16 rounded-full bg-primary-500/10 text-primary-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary-500/20 transition-all">
@@ -78,33 +68,6 @@ const LandingScreen: React.FC<LandingScreenProps> = ({
                     <p className="text-gray-400 text-base max-w-[200px] mx-auto leading-relaxed">{t.landing.startDescription}</p>
                 </button>
             </div>
-
-            {/* Confirmation Modal for New Tournament (Minimalist) */}
-            {showConfirm && (
-                <div className="fixed inset-0 flex items-center justify-center z-50 px-4">
-                    <div className="absolute inset-0 bg-black/80" onClick={() => setShowConfirm(false)}></div>
-                    <div className="bg-dark-800 border border-dark-600 p-8 rounded-2xl max-w-sm w-full relative z-10 animate-slide-up shadow-none">
-                        <h3 className="text-xl font-bold text-white mb-4">{t.landing.confirmNew}</h3>
-                        <div className="flex flex-col gap-3">
-                            <button 
-                                onClick={() => {
-                                    setShowConfirm(false);
-                                    onNewTournament();
-                                }}
-                                className="w-full py-3 bg-error-600 hover:bg-error-700 text-white font-bold rounded-xl transition-colors"
-                            >
-                                {t.landing.yesNew}
-                            </button>
-                            <button 
-                                onClick={() => setShowConfirm(false)}
-                                className="w-full py-3 bg-dark-600 hover:bg-dark-500 text-white font-bold rounded-xl transition-colors"
-                            >
-                                {t.landing.cancel}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };

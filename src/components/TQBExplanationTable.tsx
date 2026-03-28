@@ -1,7 +1,7 @@
 'use client';
 
 import { TeamStats } from '@/lib/types';
-import { formatTQBValue, outsToInnings, getDynamicTQBExplanation, calculateDisplayRanks } from '@/lib/calculations';
+import { formatTQBValue, outsToInnings, calculateDisplayRanks } from '@/lib/calculations';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface TQBExplanationTableProps {
@@ -19,16 +19,12 @@ export default function TQBExplanationTable({ rankings, isERTQB = false }: TQBEx
         .replace('{method}', method)
         .replace('{count}', tiedCount.toString());
 
-    const dynamicExplanation = getDynamicTQBExplanation(rankings, isERTQB, t);
     const displayRanks = calculateDisplayRanks(rankings, isERTQB);
 
     return (
         <div className="space-y-4 animate-fade-in">
             <div className="space-y-2">
                 <h3 className="text-lg font-bold text-white">{title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed italic">
-                    {dynamicExplanation}
-                </p>
                 <p className="text-sm text-gray-400 leading-relaxed">
                     {t.rankings.summary.description.replace('{method}', method)}
                 </p>

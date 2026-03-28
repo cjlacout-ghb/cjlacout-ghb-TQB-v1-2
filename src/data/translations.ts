@@ -123,9 +123,9 @@ export const translations = {
         },
         rankings: {
             tqbTitle: "TQB Rankings",
-            tqbSubtitle: "Team Quality Balance calculation results",
+            tqbSubtitle: "",
             ertqbTitle: "ER-TQB Rankings",
-            ertqbSubtitle: "Earned Run TQB calculation results",
+            ertqbSubtitle: "",
             needsERTQB: "TQB did not resolve all ties. Proceed to ER-TQB.",
             tieBreakNote: "If further tie-breaking is needed: 2) TQB | 3) ER-TQB | 4) Highest Batting Average | 5) Coin Toss",
             rank: "Rank",
@@ -143,17 +143,11 @@ export const translations = {
             summary: {
                 title: "{method} Calculation Summary ({count}-Way Tie)",
                 description: "This summary provides a detailed breakdown of the {method} components. The tie is resolved by comparing the offensive efficiency (Ratio Scored) against the defensive efficiency (Ratio Allowed) based on each team's total innings played.",
-                offensiveEfficiency: "Offensive Efficiency",
-                defensiveEfficiency: "Defensive Efficiency",
                 offensiveRatio: "Offensive Ratio",
                 defensiveRatio: "Defensive Ratio",
                 runsAllowed: "Runs Allowed",
                 erAllowed: "E.Runs Allowed",
-                finalValue: "Final {method}",
-                explanation: {
-                    unresolved: "In this {count}-way tie, the {method} values are identical, leaving the tie unresolved at this stage.",
-                    resolved: "In this {count}-way tie, {winner} secured Rank #1 primarily due to their superior {factor} ({value})."
-                }
+                finalValue: "Final {method}"
             },
             compare: {
                 title: "Compare TQB vs ER-TQB values",
@@ -236,7 +230,7 @@ export const translations = {
                 rights: "2026 - todos los derechos reservados"
             },
             exportPDF: "Exportar a PDF",
-            startNew: "Nueva Cálculo",
+            startNew: "Nuevo Cálculo",
             loading: "Cargando...",
             final: "Final",
             step: "Paso",
@@ -340,9 +334,9 @@ export const translations = {
         },
         rankings: {
             tqbTitle: "Posiciones TQB",
-            tqbSubtitle: "Resultados del cálculo Team Quality Balance",
+            tqbSubtitle: "",
             ertqbTitle: "Posiciones ER-TQB",
-            ertqbSubtitle: "Resultados del cálculo Earned Run TQB",
+            ertqbSubtitle: "",
             needsERTQB: "TQB no resolvió todos los empates. Proceder a ER-TQB.",
             tieBreakNote: "Si persiste el empate: 2) TQB | 3) ER-TQB | 4) Mayor Promedio de Bateo | 5) Lanzamiento de Moneda",
             rank: "Pos",
@@ -359,18 +353,12 @@ export const translations = {
             },
             summary: {
                 title: "Resumen de Cálculo {method} (Empate de {count})",
-                description: "Este resumen detalla los componentes del cálculo {method}. El empate se resuelve comparando la eficiencia ofensiva (Ratio Anotado) contra la eficiencia defensiva (Ratio Permitido) basado en las entradas jugadas de cada equipo.",
-                offensiveEfficiency: "Eficiencia Ofensiva",
-                defensiveEfficiency: "Eficiencia Defensiva",
+                description: "Este resumen detalla los componentes del cálculo {method}. Compara la eficiencia ofensiva (Ratio Anotado) contra la eficiencia defensiva (Ratio Permitido) basado en las entradas jugadas de cada equipo.",
                 offensiveRatio: "Ratio Ofensivo",
                 defensiveRatio: "Ratio Defensivo",
                 runsAllowed: "Carreras Permitidas",
                 erAllowed: "C. Limpias Permitidas",
-                finalValue: "Final {method}",
-                explanation: {
-                    unresolved: "En este empate de {count}, los valores de {method} son idénticos, dejando el empate sin resolver en esta etapa.",
-                    resolved: "En este empate de {count}, {winner} aseguró el Puesto #1 principalmente debido a su superior {factor} ({value})."
-                }
+                finalValue: "Final {method}"
             },
             compare: {
                 title: "Comparar valores TQB vs ER-TQB",

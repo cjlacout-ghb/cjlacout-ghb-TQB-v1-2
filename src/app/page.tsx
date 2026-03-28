@@ -14,6 +14,7 @@ import UserManualModal from '@/components/modals/UserManualModal';
 import PDFExportModal from '@/components/modals/PDFExportModal';
 import FeedbackModal from '@/components/modals/FeedbackModal';
 import LandingScreen from '@/components/screens/LandingScreen';
+import ConfirmResetModal from '@/components/modals/ConfirmResetModal';
 import { loadState, saveState, clearState, hasSavedState } from '@/lib/storage';
 
 export default function Home() {
@@ -35,6 +36,7 @@ export default function Home() {
     const [manualSection, setManualSection] = useState<string | undefined>();
     const [isPDFModalOpen, setIsPDFModalOpen] = useState(false);
     const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+    const [isConfirmResetOpen, setIsConfirmResetOpen] = useState(false);
 
     const handleOpenManual = useCallback((section?: string) => {
         setManualSection(section);
@@ -145,6 +147,14 @@ export default function Home() {
         setCurrentScreen(1);
     }, []);
 
+    const handleStartNewConfirm = useCallback(() => {
+        if (hasSavedState()) {
+            setIsConfirmResetOpen(true);
+        } else {
+            handleStartNew();
+        }
+    }, [handleStartNew]);
+
     const handleContinueTournament = useCallback(() => {
         const saved = loadState();
         if (saved) {
@@ -157,7 +167,7 @@ export default function Home() {
     // Handle going back
     const handleBack = useCallback(() => {
         if (currentScreen === 1) {
-            handleStartNew();
+            handleStartNewConfirm();
         } else if (currentScreen === 2) {
             setCurrentScreen(1);
         } else if (currentScreen === 3) {
@@ -167,7 +177,7 @@ export default function Home() {
         } else if (currentScreen === 5) {
             setCurrentScreen(4);
         }
-    }, [currentScreen, handleStartNew]);
+    }, [currentScreen, handleStartNewConfirm]);
 
     // Render current screen
     const renderScreen = () => {
@@ -175,7 +185,7 @@ export default function Home() {
             case 0:
                 return (
                     <LandingScreen 
-                        onNewTournament={handleStartNew}
+                        onNewTournament={handleStartNewConfirm}
                         onContinueTournament={handleContinueTournament}
                         canContinue={hasSavedState()}
                     />
@@ -213,7 +223,7 @@ export default function Home() {
                         needsERTQB={needsERTQB}
                         onProceedToERTQB={handleProceedToERTQB}
                         onExportPDF={() => setIsPDFModalOpen(true)}
-                        onStartNew={handleStartNew}
+                        onStartNew={handleStartNewConfirm}
                         onBack={handleBack}
                         totalSteps={totalSteps}
                         games={games}
@@ -238,7 +248,7 @@ export default function Home() {
                         tieBreakMethod={tieBreakMethod}
                         hasUnresolvedTies={hasUnresolvedTies}
                         onExportPDF={() => setIsPDFModalOpen(true)}
-                        onStartNew={handleStartNew}
+                        onStartNew={handleStartNewConfirm}
                         onBack={handleBack}
                         games={games}
                         onOpenManual={handleOpenManual}
@@ -305,6 +315,12 @@ export default function Home() {
             <FeedbackModal
                 isOpen={isFeedbackOpen}
                 onClose={() => setIsFeedbackOpen(false)}
+            />
+
+            <ConfirmResetModal
+                isOpen={isConfirmResetOpen}
+                onClose={() => setIsConfirmResetOpen(false)}
+                onConfirm={handleStartNew}
             />
         </div>
     );

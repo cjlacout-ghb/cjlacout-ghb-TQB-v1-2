@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { PDFExportData } from './types';
-import { formatTQBValue, outsToInnings, getDynamicTQBExplanation, calculateDisplayRanks, getTieBreakMethodText } from './calculations';
+import { formatTQBValue, outsToInnings, calculateDisplayRanks, getTieBreakMethodText } from './calculations';
 import { translations } from '@/data/translations';
 
 /**
@@ -117,12 +117,6 @@ export function generatePDF(data: PDFExportData): void {
     doc.setFontSize(10);
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(100, 100, 100);
-
-    const dynamicExplanation = getDynamicTQBExplanation(data.rankings, data.useERTQB, t);
-    const dynamicLines = doc.splitTextToSize(dynamicExplanation, pageWidth - 28);
-    doc.setFont('helvetica', 'bolditalic');
-    doc.text(dynamicLines, 14, yPos);
-    yPos += dynamicLines.length * 5 + 3;
 
     doc.setFont('helvetica', 'normal');
     const summaryIntro = t.rankings.summary.description.replace('{method}', method);

@@ -54,9 +54,11 @@ export default function ERTQBRankings({
                             </div>
                             <div>
                                 <h2 className="text-2xl font-bold text-white">{t.rankings.ertqbTitle}</h2>
-                                <p className="text-sm text-gray-400">
-                                    {t.rankings.ertqbSubtitle}
-                                </p>
+                                {t.rankings.ertqbSubtitle && (
+                                    <p className="text-sm text-gray-400">
+                                        {t.rankings.ertqbSubtitle}
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -156,10 +158,12 @@ export default function ERTQBRankings({
                         </div>
                         <button
                             onClick={() => onOpenManual?.('official-rule-c11')}
-                            className="text-xs font-bold text-primary-400 hover:text-primary-300 uppercase tracking-widest flex items-center gap-1.5 transition-colors group"
+                            className="inline-flex items-center gap-2 px-3 py-1.5 bg-primary-500/10 border border-primary-500/20 rounded-full hover:bg-primary-500/20 transition-all group"
                         >
-                            <span>{t.common.viewOfficialRule}</span>
-                            <ArrowLeft size={14} className="rotate-180 group-hover:translate-x-0.5 transition-transform" />
+                            <span className="text-[11px] font-bold text-primary-400 uppercase tracking-wider">
+                                {t.common.ruleC11}
+                            </span>
+                            <Info size={14} className="text-primary-400" />
                         </button>
                     </div>
 
