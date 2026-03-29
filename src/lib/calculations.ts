@@ -117,7 +117,8 @@ function resolveTieWaterfall(
         maxMethodUsed: TieBreakMethod,
         allowERTQB: boolean,
         hasUnresolvedTies: boolean,
-    }
+    },
+    inheritedGames?: GameData[]
 ): TeamStats[] {
     if (tiedTeams.length <= 1) return tiedTeams;
 
@@ -127,9 +128,11 @@ function resolveTieWaterfall(
         return tiedTeams;
     }
 
-    // Rule C11.2 & C11.3: Use ONLY results of games played between the tied teams
+    // Rule C11.2 & C11.3: Use ONLY results of games played between the tied teams.
+    // By passing inheritedGames, we ensure we don't "restart" the tie block if a
+    // partial resolution occurred, strictly following WBSC Linear Waterfall logic.
     const tiedIds = new Set(tiedTeams.map(t => t.id));
-    const relevantGames = allGames.filter(
+    const relevantGames = inheritedGames || allGames.filter(
         g => tiedIds.has(g.teamAId) && tiedIds.has(g.teamBId)
     );
 
@@ -225,19 +228,18 @@ function resolveTieWaterfall(
 
     // IF NOT SEPARATED: Try next criteria level on the SAME group
     if (subgroups.length === 1) {
-        return resolveTieWaterfall(tiedTeams, allGames, criteriaLevel + 1, context);
+        return resolveTieWaterfall(tiedTeams, allGames, criteriaLevel + 1, context, relevantGames);
     }
 
     // IF SEPARATED: Narrow the tie group and move to NEXT criteria level
     // CRITICAL (Softball C11): We move to criteriaLevel + 1 for each subgroup.
     // We NEVER go back to Step 1 (Head-to-Head) once we've reached a higher level.
+    // We also pass down `relevantGames` so that the statistical calculation at the next
+    // level is based on the original tied group, not just the remaining subset.
     const result: TeamStats[] = [];
     for (const group of subgroups) {
         if (group.length > 1) {
-            // Move to next level (e.g., TQB -> ER-TQB)
-            // The "relevantGames" will be naturally re-filtered inside the recursive call
-            // because tiedIds will now only contain IDs from this specific subgroup.
-            result.push(...resolveTieWaterfall(group, allGames, criteriaLevel + 1, context));
+            result.push(...resolveTieWaterfall(group, allGames, criteriaLevel + 1, context, relevantGames));
         } else {
             result.push(group[0]);
         }

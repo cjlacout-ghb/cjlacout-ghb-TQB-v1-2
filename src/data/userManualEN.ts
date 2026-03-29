@@ -341,8 +341,10 @@ All ties shall be settled in the following sequential order:
 4. **Highest Batting Average**: Comparison among tied teams.
 5. **Coin Toss**: As a last resort.
 
-### The Waterfall Rule
-Tie-breaking criteria are applied in sequential order. Once a tie moves to a subsequent step (like TQB), the calculation is based ONLY on the games played between the teams currently involved in that specific tie.
+### The Waterfall Rule (Linear Waterfall)
+Tie-breaking criteria are applied in strict sequential order. Once a tie advances to a subsequent step (Criterion 1 → 2, or 2 → 3), **the rule prohibits going back**.
+
+**Original Group Integrity Principle:** If TQB partially separates the group (e.g., Team A places 1st, but B and C remain tied), the ER-TQB for B and C is calculated using the games of the **entire original group** (A vs B, A vs C, B vs C), NOT just the B vs C game. This ensures a continuous linear resolution, without "restarting" the tie as if it were only a two-team affair.
 
 ### About WBSC Rule C11
 This calculator implements the official procedures from the **WBSC (World Baseball Softball Confederation)** Tournament Regulations.

@@ -341,8 +341,10 @@ Todos los empates se resolverán en el siguiente orden secuencial:
 4. **Promedio de Bateo Más Alto**: Comparación entre los equipos empatados.
 5. **Lanzamiento de Moneda**: Como último recurso.
 
-### La Regla de Cascada
-Los criterios de desempate se aplican en orden secuencial. Una vez que un empate pasa a un nivel superior (como el TQB), el cálculo se basa ÚNICAMENTE en los juegos jugados entre los equipos involucrados en ese empate específico.
+### La Regla de Cascada (Efecto Waterfall)
+Los criterios de desempate se aplican en orden secuencial. Una vez que un empate avanza a un nivel superior (del Criterio 1 al Criterio 2, o del 2 al 3), **la regla prohíbe volver atrás**.
+
+**Principio de Integridad del Grupo Original:** Si el TQB separa parcialmente el grupo (ej. Equipo A queda 1ro, pero B y C siguen empatados), el ER-TQB para B y C se calcula usando los juegos de **todo el grupo original** (A vs B, A vs C, B vs C), NO solo el juego B vs C. Esto asegura una resolución lineal continua, sin "reiniciar" el empate como si fuera solo de dos equipos.
 
 ### Acerca de la Regla C11 de WBSC
 Esta calculadora implementa los procedimientos oficiales de la **WBSC (Confederación Mundial de Béisbol y Softbol)**.
